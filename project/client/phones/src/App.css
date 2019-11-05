@@ -1,3 +1,10 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
+
+*{
+  font-family: 'Roboto', sans-serif;
+  transition: all 0.2s ease-in-out;
+}
+
 .App {
   text-align: center;
 }
@@ -19,4 +26,36 @@
 
 .App-link {
   color: #09d3ac;
+}
+.phone-list{
+  width:100%;
+  text-align: center;
+}
+.phone-container{
+  display:inline-block;
+  width:30%;
+  cursor: pointer;
+  vertical-align: top;
+}
+
+.phone-text-container,
+.phone-title{
+  font-weight: 600;
+  vertical-align: top;
+  position: relative;
+  z-index: 1;
+}
+.phone-middle-line{
+  width:100%;
+  height:1px;
+  background-color: #000000;
+}
+.phone-img{
+  width:35%;
+  position: relative;
+  z-index: 0;
+}
+
+.phone-container:hover .phone-img{
+  transform: scale(1.05);
 }
