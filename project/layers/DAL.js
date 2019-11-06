@@ -25,15 +25,17 @@ const readAll = (cb) =>{
         }
     })
 }
-const deleteOne = ()=>{}
-const reWriteDB = ()=>{}
-const updateOne = ()=>{}
-const saveOne = () =>{}
+const reWriteDB = (data,cb)=>{
+    fs.writeFile(filePath,JSON.stringify(data), (e)=>{
+        if(e){cb(e)}
+        else{
+            cb(null,data);
+        }
+    })
+}
+
 module.exports = {
     readOne: readOne,
     readAll:readAll,
-    deleteOne:deleteOne,
-    reWriteDB:reWriteDB,
-    updateOne:updateOne,
-    saveOne: saveOne
+    reWriteDB:reWriteDB
 }

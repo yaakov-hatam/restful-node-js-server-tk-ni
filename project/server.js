@@ -15,7 +15,7 @@ app.get('/phones',(req,res)=>{
        }
    })
 })
-app.get('/phones/:id', (req,res)=>{
+app.get('/edit/:id', (req,res)=>{
     let id = req.params.id;
     BLL.getPhone(id,(e,data)=>{
         if(e){
@@ -25,14 +25,13 @@ app.get('/phones/:id', (req,res)=>{
         }
     })
 })
-app.post('/phones',(req,res)=>{
-
-})
-
-app.put('/phones',(req,res)=>{
-
-})
-
-app.delete('/phones', (req,res)=>{
+app.delete('/delete', (req,res)=>{
     
+})
+
+app.post('/edit',(req,res)=>{
+    //let id = req.body.id;
+    //let phone = req.body;
+    console.log(req.body);
+    //BLL.UPDATEPHONE
 })

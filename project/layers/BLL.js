@@ -16,7 +16,29 @@ const getAllPhones = (cb)=>{
         }
     })
 }
-const updatePhone = () =>{}
+const updatePhone = (obj,cb) =>{
+    let phones;
+    DAL.readAll((e,data)=>{
+        if(e){cb(e)}
+        else{
+            phones = JSON.parse(data.toString());
+        }
+    })
+    if(phones.length > 0){
+        for(let i = 0; i < phones.length; i++){
+            if(phones[i].id == obj.id){
+                phones[i] = obj;
+            }
+        }
+    }
+    //DAL REWRITEDB
+    DAL.reWriteDB(phones,(e,data)=>{
+        if(e){cb(e)}
+        else{
+            cb(null,data);
+        }
+    })
+}
 const deletePhone = () =>{}
 const addPhone = () =>{}
 
