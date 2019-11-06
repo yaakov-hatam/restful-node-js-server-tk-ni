@@ -32,6 +32,6 @@ app.delete('/delete', (req,res)=>{
 app.post('/edit',(req,res)=>{
     //let id = req.body.id;
     //let phone = req.body;
-    console.log(req.body);
+    console.log(req.query, req.params);
     //BLL.UPDATEPHONE
 })

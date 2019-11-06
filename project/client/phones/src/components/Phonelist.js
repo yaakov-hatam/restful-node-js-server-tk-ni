@@ -1,6 +1,6 @@
 import React from 'react';
 import Phone from './Phone';
-
+import {serverUrl} from './../ServerSetup';
 class Phonelist extends React.Component{
     constructor(props){
         super(props);
@@ -9,7 +9,7 @@ class Phonelist extends React.Component{
         }
     }
     componentDidMount(){
-        fetch(this.props.serverUrl + '/phones')
+        fetch(serverUrl + '/phones')
         .then(data=> data.json())
         .then(data=> this.setState({phones: data}))
         .catch(err=>console.log(err));

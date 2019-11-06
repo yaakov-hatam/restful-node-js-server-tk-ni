@@ -45,11 +45,12 @@ class EditPhone extends React.Component {
         this.setState({ phone: prevPhone }, () => { });
     }
     handleSave = () => {
+        console.log(this.state.phone);
         fetch(serverUrl + '/edit',{
             method: 'POST',
-            body: JSON.stringify(this.state.phone),
+            body: JSON.stringify({...this.state.phone}),
             headers: {'Content-type': 'application/json'}
-        })
+        }).catch(err=>console.log(err));
     }
     render() {
         return (<div>
