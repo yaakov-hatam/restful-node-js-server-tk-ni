@@ -1,6 +1,13 @@
 const DAL = require('./DAL');
 
-const getPhone = () =>{}
+const getPhone = (id,cb) =>{
+    DAL.readOne(id,(e,data)=>{
+        if(e){cb(e)}
+        else{
+            cb(null,data);
+        }
+    })
+}
 const getAllPhones = (cb)=>{
     DAL.readAll((e,data)=>{
         if(e){cb(e)}

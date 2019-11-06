@@ -1,5 +1,10 @@
 import React from 'react';
-
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route,
+    Link
+  } from "react-router-dom";
 class PhoneSnippet extends React.Component{
     constructor(props){
         super(props);
@@ -10,7 +15,9 @@ class PhoneSnippet extends React.Component{
             <div className="phone-snippet">
                 <div className="phone-middle-line" />
                 {this.props.snippet}
-                <button>Edit</button><button>Delete</button>
+
+               <Link to={"/edit/" + this.props.id}>Edit</Link>
+                <button>Delete</button>
             </div>
         )
     }
