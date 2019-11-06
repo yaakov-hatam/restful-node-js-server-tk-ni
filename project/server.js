@@ -15,7 +15,16 @@ app.get('/phones',(req,res)=>{
        }
    })
 })
-
+app.get('/phones/:id', (req,res)=>{
+    let id = req.params.id;
+    BLL.getPhone(id,(e,data)=>{
+        if(e){
+            res.status(500).send();
+        }else{
+           res.send(data);
+        }
+    })
+})
 app.post('/phones',(req,res)=>{
 
 })
