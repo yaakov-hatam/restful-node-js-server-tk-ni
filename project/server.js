@@ -59,3 +59,14 @@ app.post('/edit',(req,res)=>{
         }
     })
 })
+
+app.post('/add', (req,res)=>{
+    let phone = req.body;
+    BLL.addPhone(phone,(e,data)=>{
+        if(e){
+            res.status(500).send();
+        }else{
+            res.status(200).send();
+        }
+    })
+})
