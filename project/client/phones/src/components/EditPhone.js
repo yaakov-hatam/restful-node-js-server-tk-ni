@@ -1,11 +1,13 @@
 import React from 'react';
 import { serverUrl } from './../ServerSetup';
+import { Redirect } from 'react-router-dom';
 class EditPhone extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             phone: {},
-            original: {}
+            original: {},
+            redirect: false
         }
         this.handleNameChange = this.handleNameChange.bind(this);
         this.handleSnippetChange = this.handleSnippetChange.bind(this);
@@ -17,11 +19,7 @@ class EditPhone extends React.Component {
         let id = window.location.pathname.substr(6, window.location.pathname.length);
         fetch(serverUrl + '/edit/' + id)
             .then(data => data.json())
-            .then(data => {
-                data.imageUrl = 'http://angular.github.io/angular-phonecat/step-14/app/' + data.imageUrl
-                return Promise.resolve(data);
-            })
-            .then(data => this.setState({ phone: data, original: data }, () => { console.log(this.state.phone) }))
+            .then(data => this.setState({ phone: data, original: data }, () => {}))
     }
 
     handleNameChange = (e) => {
@@ -45,14 +43,24 @@ class EditPhone extends React.Component {
         this.setState({ phone: prevPhone }, () => { });
     }
     handleSave = () => {
-        console.log(this.state.phone);
         fetch(serverUrl + '/edit',{
             method: 'POST',
             body: JSON.stringify({...this.state.phone}),
-            headers: {'Content-type': 'application/json'}
-        }).catch(err=>console.log(err));
+            headers: {
+                'Content-type':'application/json'}
+        }).then(res=>{
+            if(res.status == 200){
+                let prevState = {...this.state};
+                prevState.redirect = true;
+                this.setState({redirect: prevState.redirect});
+            }
+        })
+        .catch(err=>console.log(err));
     }
     render() {
+        if(this.state.redirect){
+            return <Redirect to="/"/>
+        }else{
         return (<div>
             {this.state.phone.name ? <div>
                 <h1>Edit {this.state.original.name}</h1>
@@ -69,22 +77,22 @@ class EditPhone extends React.Component {
                 </div>
                 <div className="edit-label">
                     <label>Snippet
-                    <input defaultValue={this.state.original.snippet} />
+                    <input defaultValue={this.state.original.snippet} onChange={(e) => this.handleSnippetChange(e)}/>
                     </label>
                 </div>
                 <div className="edit-label">
                     <label>Age
-                    <input defaultValue={this.state.original.age} />
+                    <input defaultValue={this.state.original.age} onChange={(e) => this.handleAgeChange(e)}/>
                     </label>
                 </div>
                 <div className="edit-label">
                     <label>ImageUrl
-                    <input defaultValue={this.state.original.imageUrl} />
+                    <input defaultValue={this.state.original.imageUrl} onChange={(e) => this.handleImageUrlChange(e)}/>
                     </label>
                 </div>
                 <button onClick={this.handleSave}>Save</button>
             </div> : 'Loading...'}
-        </div>)
+        </div>)}
     }
 }
 

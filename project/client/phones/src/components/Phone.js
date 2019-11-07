@@ -4,11 +4,11 @@ import PhoneSnippet from './PhoneSnippet';
 class Phone extends React.Component {
     constructor(props) {
         super(props);
-        this.phoneUrl = 'http://angular.github.io/angular-phonecat/step-14/app/' + this.props.imageUrl;
         this.state = {
             open: false
         }
     }
+
     handleClick = () => {
         let prevState = { ...this.state };
         if (prevState.open) {
@@ -24,7 +24,7 @@ class Phone extends React.Component {
                 <p className="phone-title">{this.props.name}</p>
             </div>
             
-            <img alt={this.props.name} className="phone-img" src={this.phoneUrl} />
+            <img alt={this.props.name} className="phone-img" src={this.props.imageUrl} />
             {this.state.open ? <div>
               <PhoneSnippet {...this.props}/>
             </div> : ''}

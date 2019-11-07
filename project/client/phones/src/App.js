@@ -8,6 +8,7 @@ import {
   Link
 } from "react-router-dom";
 import EditPhone from './components/EditPhone';
+import DeletePhone from './components/DeletePhone';
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -22,6 +23,9 @@ class App extends React.Component {
           </Route>
           <Route exact path="/edit/:id">
             <EditPhone/>
+          </Route>
+          <Route exact path="/delete/:id">
+            <DeletePhone/>
           </Route>
         </Router>
       </div>

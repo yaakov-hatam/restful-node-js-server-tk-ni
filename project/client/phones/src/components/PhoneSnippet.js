@@ -5,11 +5,11 @@ import {
     Route,
     Link
   } from "react-router-dom";
+import DeletePopup from './DeletePhone';
 class PhoneSnippet extends React.Component{
     constructor(props){
         super(props);
     }
-
     render(){
         return(
             <div className="phone-snippet">
@@ -17,7 +17,7 @@ class PhoneSnippet extends React.Component{
                 {this.props.snippet}
 
                <Link to={"/edit/" + this.props.id}>Edit</Link>
-                <button>Delete</button>
+               <Link to={"/delete/" + this.props.id}>Delete</Link>
             </div>
         )
     }

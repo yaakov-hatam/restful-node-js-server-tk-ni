@@ -21,25 +21,48 @@ const updatePhone = (obj,cb) =>{
     DAL.readAll((e,data)=>{
         if(e){cb(e)}
         else{
-            phones = JSON.parse(data.toString());
+            phones = data;
+            if(phones.length > 0){
+                for(let i = 0; i < phones.length; i++){
+                    if(phones[i].id == obj.id){
+                        phones[i] = obj;
+                    }
+                }
+            }
+        
+            DAL.reWriteDB(phones,(e,data)=>{
+                if(e){cb(e)}
+                else{
+                    cb(null,data);
+                }
+            })
         }
     })
-    if(phones.length > 0){
-        for(let i = 0; i < phones.length; i++){
-            if(phones[i].id == obj.id){
-                phones[i] = obj;
-            }
-        }
-    }
-    //DAL REWRITEDB
-    DAL.reWriteDB(phones,(e,data)=>{
+
+}   
+const deletePhone = (obj,cb) =>{
+    let phones;
+    DAL.readAll((e,data)=>{
         if(e){cb(e)}
         else{
-            cb(null,data);
+            phones = data;
+            if(phones.length > 0){
+                for(let i = 0; i < phones.length; i++){
+                    if(phones[i].id == obj.id){
+                        phones.splice(i,1);
+                    }
+                }
+            }
+        
+            DAL.reWriteDB(phones,(e,data)=>{
+                if(e){cb(e)}
+                else{
+                    cb(null,data);
+                }
+            })
         }
     })
 }
-const deletePhone = () =>{}
 const addPhone = () =>{}
 
 module.exports = {
