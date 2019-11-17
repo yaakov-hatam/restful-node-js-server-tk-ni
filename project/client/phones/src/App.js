@@ -10,17 +10,25 @@ import {
 import EditPhone from './components/EditPhone';
 import DeletePhone from './components/DeletePhone';
 import AddPhone from './components/AddPhone';
+import Login from './components/Login';
 class App extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      
+    }
   }
   render() {
     return (
       <div>
         <Router>
-          <Link to="/">All Phones</Link>
+       
+          <Link to="/phones">All Phones</Link>
           <Link to="/add">Add New Phone</Link>
           <Route exact path="/">
+            <Login/>
+          </Route>
+          <Route exact path="/phones">
             <Phonelist/>
           </Route>
           <Route exact path="/edit/:id">
