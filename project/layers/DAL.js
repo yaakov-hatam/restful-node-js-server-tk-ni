@@ -1,7 +1,7 @@
 const fs = require('fs');
-const filePath = './db/phones.json';
+let _fileName;
 const readOne = (id,cb) =>{
-    fs.readFile(filePath,(e,data)=>{
+    fs.readFile(_fileName,(e,data)=>{
         if(e){cb(e)}
         else{
             let phones = JSON.parse(data.toString());
@@ -18,7 +18,7 @@ const readOne = (id,cb) =>{
     })
 }
 const readAll = (cb) =>{
-    fs.readFile(filePath,(e,data)=>{
+    fs.readFile(_fileName,(e,data)=>{
         if(e){cb(e)}
         else{
             cb(null,JSON.parse(data.toString()));
@@ -26,7 +26,7 @@ const readAll = (cb) =>{
     })
 }
 const reWriteDB = (data,cb)=>{
-    fs.writeFile(filePath,JSON.stringify(data), (e)=>{
+    fs.writeFile(_fileName,JSON.stringify(data), (e)=>{
         if(e){cb(e)}
         else{
             cb(null,data);
@@ -34,9 +34,13 @@ const reWriteDB = (data,cb)=>{
     })
 }
 
-
-module.exports = {
-    readOne: readOne,
-    readAll:readAll,
-    reWriteDB:reWriteDB
+const dalModule = (fileName) =>{
+    _fileName = fileName;
+    return{
+        readOne:readOne,
+        readAll:readAll,
+        reWriteDB: reWriteDB
+    }
 }
+
+module.exports = dalModule;

@@ -9,7 +9,10 @@ class Phonelist extends React.Component{
         }
     }
     componentDidMount(){
-        fetch(serverUrl + '/phones')
+        fetch(serverUrl + '/phones',{
+            method: 'GET',
+            headers:{ 'Authorization': 'bearer '+ window.localStorage.getItem('phones-token')}
+        })
         .then(data=> data.json())
         .then(data=> this.setState({phones: data}))
         .catch(err=>console.log(err));

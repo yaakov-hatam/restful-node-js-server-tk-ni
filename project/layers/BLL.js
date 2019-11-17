@@ -1,4 +1,4 @@
-const DAL = require('./DAL');
+const DAL = require('./DAL')('./db/phones.json');
 
 const getPhone = (id, cb) => {
     DAL.readOne(id, (e, data) => {
